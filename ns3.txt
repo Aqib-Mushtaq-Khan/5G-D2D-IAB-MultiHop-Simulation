@@ -1,0 +1,48 @@
+cd ~/ns-3-dev
+cd ~/ns-3-dev
+./ns3 build
+
+// file cd scratch
+d2d-sidelink.cc   //d2d
+iab-multihop.cc    // IAB hops
+
+
+cd ~/ns-3-dev
+./ns3 build
+
+
+Run both modes
+./ns3 run "d2d-sidelink --mode=direct"
+Relay:
+./ns3 run "d2d-sidelink --mode=relay"
+
+
+./ns3 run "d2d-sidelink --mode=relay --intervalUs=100"
+
+ ./ns3 run "d2d-sidelink --mode=relay --intervalUs=200"
+./ns3 run "d2d-sidelink --mode=relay --intervalUs=300"
+
+for multi hope 
+./ns3 run "iab-multihop --hops=1"
+./ns3 run "iab-multihop --hops=2"
+./ns3 run "iab-multihop --hops=3"
+
+//Generate CSV
+echo "mode,interval_us,throughput_mbps,delay_ms,loss_pct" > d2d_results.csv
+./ns3 run "d2d-sidelink --mode=direct" | grep CSV >> d2d_results.csv
+./ns3 run "d2d-sidelink --mode=relay --intervalUs=100" | grep CSV >> d2d_results.csv
+./ns3 run "d2d-sidelink --mode=relay --intervalUs=200" | grep CSV >> d2d_results.csv
+./ns3 run "d2d-sidelink --mode=relay --intervalUs=300" | grep CSV >> d2d_results.csv
+
+echo "hops,throughput_mbps,delay_ms,loss_pct" > iab_results.csv
+./ns3 run "iab-multihop --hops=1" | grep CSV >> iab_results.csv
+./ns3 run "iab-multihop --hops=2" | grep CSV >> iab_results.csv
+./ns3 run "iab-multihop --hops=3" | grep CSV >> iab_results.csv
+
+
+// SCV files
+cat d2d_results.csv
+cat iab_results.csv
+
+//CSV file in Directory
+\\wsl$\Ubuntu\home\aqib\ns-3-dev\
