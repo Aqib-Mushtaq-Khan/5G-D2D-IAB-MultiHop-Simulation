@@ -1,0 +1,5 @@
+mode,interval_us,throughput_mbps,delay_ms,loss_pct
+CSV,direct,100,81.8239,1036.51,15.665
+CSV,relay,100,45.3133,1797.28,50.4188
+CSV,relay,200,50.7657,428.02,3.29
+CSV,relay,300,38.0486,1.8527,0.0712491
